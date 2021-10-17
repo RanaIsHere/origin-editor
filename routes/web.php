@@ -17,7 +17,7 @@ use Illuminate\Support\Facades\Route;
 
 // Login
 
-Route::get('/', function () { return view('login'); });
+Route::get('/', function () { return view('login', ['page' => 'Login']); });
 Route::post('/', [LoginController::class, 'login' ]);
 
 // Dashboard
@@ -32,3 +32,5 @@ Route::post('/dashboard/customers/create', [DashboardController::class, 'addClie
 Route::post('/dashboard/transactions/insertCash', [DashboardController::class, 'insertTransactionByCash']);
 Route::post('/dashboard/transactions/insertCredit', [DashboardController::class, 'insertTransactionByCredit']);
 Route::post('/dashboard/transactions/createPackages', [DashboardController::class, 'createPackages']);
+
+Route::get('/invoice', [DashboardController::class, 'getInvoices'])->name('invoice');

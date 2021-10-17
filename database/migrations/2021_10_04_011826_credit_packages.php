@@ -14,7 +14,8 @@ class CreditPackages extends Migration
     public function up()
     {
         Schema::create('credit_packages', function (Blueprint $table) {
-            $table->string('package_code', 20);
+            // $table->string('package_code', 20);
+            $table->id('package_code');
             $table->double('package_price');
             $table->double('down_payment');
             $table->integer('package_instalment_quantity');

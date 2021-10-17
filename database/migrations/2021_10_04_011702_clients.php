@@ -14,7 +14,7 @@ class Clients extends Migration
     public function up()
     {
         Schema::create('clients', function (Blueprint $table) {
-            $table->string('client_id', 255);
+            $table->string('client_id', 255)->unique();
             $table->string('client_name', 60);
             $table->string('client_address', 255);
             $table->string('client_phone', 128);

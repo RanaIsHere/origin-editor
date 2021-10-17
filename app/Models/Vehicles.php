@@ -11,5 +11,5 @@ class Vehicles extends Model
 
     public $timestamps = false;
 
-    protected $fillable = ['vehicle_code', 'vehicle_brand', 'vehicle_type', 'vehicle_color', 'vehicle_price', 'vehicle_image'];
+    protected $fillable = ['vehicle_code', 'vehicle_brand', 'vehicle_type', 'vehicle_color', 'vehicle_price', 'vehicle_image', 'available'];
 }

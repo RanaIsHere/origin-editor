@@ -14,8 +14,10 @@ class Instalments extends Migration
     public function up()
     {
         Schema::create('instalments', function (Blueprint $table) {
-            $table->string('instalment_code', 20);
-            $table->string('credit_code', 20);
+            // $table->string('instalment_code', 20);
+            // $table->string('credit_code', 20);
+            $table->id('instalment_code');
+            $table->integer('credit_code');
             $table->date('instalment_date');
             $table->double('instalment_quantity');
             $table->integer('instalment_of');

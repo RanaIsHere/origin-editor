@@ -14,7 +14,8 @@ class Cashes extends Migration
     public function up()
     {
         Schema::create('cashes', function (Blueprint $table) {
-            $table->string('cash_code', 20);
+            // $table->string('cash_code', 20);
+            $table->id('cash_code');
             $table->string('client_id', 255);
             $table->string('vehicle_code', 20);
             $table->date('cash_date');

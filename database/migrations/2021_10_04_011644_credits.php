@@ -14,7 +14,9 @@ class Credits extends Migration
     public function up()
     {
         Schema::create('credits', function (Blueprint $table) {
-            $table->string('credit_code', 20);
+            // $table->string('credit_code', 20);
+            $table->id('credit_id');
+            $table->text('credit_code');
             $table->string('client_id', 255);
             $table->string('package_code', 20);
             $table->string('vehicle_code', 20);

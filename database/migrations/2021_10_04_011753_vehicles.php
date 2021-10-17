@@ -14,12 +14,15 @@ class Vehicles extends Migration
     public function up()
     {
         Schema::create('vehicles', function (Blueprint $table) {
-            $table->string('vehicle_code', 20);
+            $table->id('vehicle_id');
+            $table->string('vehicle_code', 20)->unique();
             $table->string('vehicle_brand', 50);
             $table->enum('vehicle_type', ['SEDAN', 'CONVERTIBLE', 'COUPE', 'SPORTS', 'SUV', 'MINIVAN']);
             $table->string('vehicle_color', 50);
             $table->double('vehicle_price');
             $table->string('vehicle_image', 100);
+            // possible status
+            $table->boolean('available')->default(1);
         });
     }
 

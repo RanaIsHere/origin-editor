@@ -11,5 +11,10 @@ class Instalments extends Model
 
     public $timestamps = false;
 
-    protected $fillable = ['instalment_code', 'credit_code', 'instalment_date', 'instalment_quantity', 'instalment_of', 'instalment_remaining', 'instalment_remaining_price'];
+    protected $fillable = ['instalment_date', 'instalment_quantity', 'instalment_of', 'instalment_remaining', 'instalment_remaining_price'];
+
+    public function credits() 
+    {
+        return $this->belongsTo(Credits::class, 'credit_code');    
+    }
 }

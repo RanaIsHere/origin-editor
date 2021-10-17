@@ -25,6 +25,46 @@
 
         <script>
             $(function () {
+                $('#clientPicker').DataTable();
+                $('#customerTable').DataTable();
+                $('#transactionCashTable').DataTable();
+                $('#transactionCreditTable').DataTable();
+                $('#unpaidInstalmentTable').DataTable();
+                $('#customerTablePage').DataTable();
+                $('#vehicleTableList').DataTable();
+                $("#vehiclePicker").DataTable();
+
+                $('#vehiclePicker').on('click', '.chooseBtn', function () {
+                    let em = $(this).closest('tr');
+                    let id = em.find('td').eq(0).text();
+                    let price = em.find('td').eq(4).text();
+
+                    if ($('#vehicleCodeCash').is(":visible")) {
+                        $('#vehicleCodeCash').val(id);
+                        $('#vehiclePriceCash').val(price);
+                    }
+
+                    if ($('#vehicleCodeCredit').is(":visible")) {
+                        $('#vehicleCodeCredit').val(id);
+                    }
+                });
+
+                $('#clientPicker').on('click', '.chooseBtn', function () {
+                    // e.preventDefault();
+                    let em = $(this).closest('tr');
+                    let id = em.find('td').eq(0).text();
+                    // let name = em.find('td').eq(1).text();
+                    // alert(id));
+
+                    if ($('#clientIdCash').is(":visible")) {
+                        $.trim($('#clientIdCash').val(id).replace(' ', ''));
+                    }
+                    
+                    if ($('#clientIdCredit').is(":visible")) {
+                        $.trim($('#clientIdCredit').val(id).replace(' ', ''));
+                    }
+                });
+
                 $('.cashBtn').click(function (e) {
                     e.preventDefault();
 

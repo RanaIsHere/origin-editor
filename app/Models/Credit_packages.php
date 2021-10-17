@@ -11,5 +11,10 @@ class Credit_packages extends Model
 
     public $timestamps = false;
 
-    protected $fillable = ['package_code', 'package_price', 'down_payment', 'package_instalment_quantity', 'interest', 'instalment_value'];
+    protected $fillable = ['package_price', 'down_payment', 'package_instalment_quantity', 'interest', 'instalment_value'];
+
+    public function credits()
+    {
+        return $this->belongsTo(Credits::class, 'package_code');
+    }
 }

@@ -55,10 +55,10 @@
         </div>
 
         <div class="col">
-            <div class="container">
+            <div class="container p-3">
                 <p class="fs-4 text-center">Customer Lists</p>
 
-                <div class="control-room">
+                {{-- <div class="control-room">
                     <div class="text-center">
                         <button type="button" class="btn btn-success btn-sm nameBtn"> Query by Name </button>
                         <button type="button" class="btn btn-success btn-sm idBtn"> Query by ID </button>
@@ -92,14 +92,14 @@
                         
                         <button type="submit" class="btn btn-primary btn-sm"> Search </button>
                     </form>
-                </div>
+                </div> --}}
 
-                <table class="table table-striped projects">
+                <table class="table table-striped projects" id="customerTablePage">
                     <thead>
                         <tr>
-                            <th style="width: 10%" class="text-center">
+                            {{-- <th style="width: 10%" class="text-center">
                                 Client ID
-                            </th>
+                            </th> --}}
                             <th style="width: 15%" class="text-center">
                                 Client Name
                             </th>
@@ -115,41 +115,43 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td class="text-center">
-                                <a>
-                                    2102101203021
-                                </a>
-                            </td>
-                            <td class="text-center">
-                                <a>
-                                    Refan Ardiansyah
-                                </a>
-                            </td>
-                            <td class="text-center">
-                                <a>
-                                    Jl. Moch Toha No. 19A
-                                </a>
-                            </td>
-                            <td class="text-center">
-                                <a>
-                                    +6282126037122
-                                </a>
-                            </td>
-                            <td class="project-actions text-right">
-                                <button class="btn btn-info btn-sm">
-                                    <i class="fas fa-pencil-alt">
-                                        Edit
-                                    </i>
-                                </button>
-                                
-                                <button class="btn btn-danger btn-sm">
-                                    <i class="fas fa-trash">
-                                        Delete
-                                    </i>
-                                </button>
-                            </td>
-                        </tr>
+                        @foreach ($clientData as $cli)
+                            <tr>
+                                {{-- <td class="text-center">
+                                    <a>
+                                        2102101203021
+                                    </a>
+                                </td> --}}
+                                <td class="text-center">
+                                    <a>
+                                        {{ $cli->client_name }}
+                                    </a>
+                                </td>
+                                <td class="text-center">
+                                    <a>
+                                        {{ $cli->client_address }}
+                                    </a>
+                                </td>
+                                <td class="text-center">
+                                    <a>
+                                        {{ $cli->client_phone }}
+                                    </a>
+                                </td>
+                                <td class="project-actions text-right">
+                                    <button class="btn btn-info btn-sm">
+                                        <i class="fas fa-pencil-alt">
+                                            Edit
+                                        </i>
+                                    </button>
+                                    
+                                    {{-- <button class="btn btn-danger btn-sm">
+                                        <i class="fas fa-trash">
+                                            Delete
+                                        </i>
+                                    </button> --}}
+                                </td>
+                            </tr>
+                        @endforeach
                     </tbody>
                 </table>
             </div>

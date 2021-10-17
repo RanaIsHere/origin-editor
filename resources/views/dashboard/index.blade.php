@@ -26,11 +26,11 @@
                     @csrf
 
                     <div class="card-body">
-                        <div class="form-group">
+                        {{-- <div class="form-group">
                             <label for="vehicleCode">Vehicle Code</label>
                             <input type="text" class="form-control" name="vehicle_code" id="vehicleCode"
                                 placeholder="Enter vehicle code">
-                        </div>
+                        </div> --}}
 
                         <div class="form-group">
                             <label for="vehicleBrand">Vehicle Brand</label>
@@ -40,8 +40,17 @@
 
                         <div class="form-group">
                             <label for="vehicleType">Vehicle Type</label>
-                            <input type="text" class="form-control" name="vehicle_type" id="vehicleType"
-                                placeholder="Enter vehicle type">
+                            {{-- <input type="text" class="form-control" name="vehicle_type" id="vehicleType" placeholder="Enter vehicle type"> --}}
+                            <select name="vehicle_type" class="form-control" id="vehicleType">
+                                @foreach ($vehicleList as $v)
+                                    <option value="{{ $v }}"> {{ $v }} </option>
+                                @endforeach
+                                {{-- <option value="CONVERTIBLE"> CONVERTIBLE </option>
+                                <option value="COUPE">COUPE</option>
+                                <option value="SPORTS">SPORTS</option>
+                                <option value="SUV">SUV</option>
+                                <option value="MINIVAN">MINIVAN</option> --}}
+                            </select>
                         </div>
 
                         <div class="form-group">
@@ -75,10 +84,10 @@
         </div>
 
         <div class="col">
-            <div class="container">
+            <div class="container p-3">
                 <p class="fs-4 text-center">Vehicle Lists</p>
 
-                <table class="table table-striped projects">
+                <table class="table table-striped projects" id="vehicleTableList">
                     <thead>
                         <tr>
                             <th style="width: 10%" class="text-center">
@@ -96,6 +105,9 @@
                             <th style="width: 20%" class="text-center">
                                 Vehicle Price
                             </th>
+                            <th style="width: 5%" class="text-center">
+                                Available
+                            </th>
                             <th style="width: 20%" class="text-center">
                             </th>
                         </tr>
@@ -103,17 +115,17 @@
                     <tbody>
                         @foreach ($vehicleData as $v)
                             <tr>
-                                <td>
+                                <td class="text-center">
                                     <a>
                                         {{ $v->vehicle_code }}
                                     </a>
                                 </td>
-                                <td>
+                                <td class="text-center">
                                     <a>
                                         {{ $v->vehicle_brand }}
                                     </a>
                                 </td>
-                                <td>
+                                <td class="text-center">
                                     <a>
                                         {{ $v->vehicle_type }}
                                     </a>
@@ -128,6 +140,11 @@
                                         Rp. {{ $v->vehicle_price }}
                                     </a>
                                 </td>
+                                <td class="vehicle-price text-center">
+                                    <a>
+                                        {{ $v->available }}
+                                    </a>
+                                </td>
                                 <td class="project-actions text-right">
                                     <button class="btn btn-primary btn-sm">
                                         <i class="fas fa-folder">
@@ -135,7 +152,7 @@
                                         </i>
                                     </button>
                                     
-                                    <button class="btn btn-info btn-sm">
+                                    {{-- <button class="btn btn-info btn-sm">
                                         <i class="fas fa-pencil-alt">
                                             Edit
                                         </i>
@@ -145,7 +162,7 @@
                                         <i class="fas fa-trash">
                                             Delete
                                         </i>
-                                    </button>
+                                    </button> --}}
                                 </td>
                             </tr>                      
                         @endforeach

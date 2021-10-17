@@ -18,14 +18,14 @@
     </nav>
 
     <div class="row" style="--bs-gutter-x: 0rem;">
-        <div class="col-4">
-            <div class="container d-flex justify-content-center flex-column" style="background-color: rgb(240, 240, 240);" id="choiceBetweenCashCredit"> 
+        <div class="col-md-4">
+            <div class="container d-flex justify-content-center flex-column" style="background-color: rgb(240, 240, 240); width: 80%" id="choiceBetweenCashCredit"> 
                 <button type="button" class="btn btn-success btn-lg mb-3 mt-3 cashBtn"> Cash </button>
                 <button type="button" class="btn btn-success btn-lg mb-3 creditBtn"> Credit </button>
-                <button type="button" class="btn btn-success btn-lg mb-3 packageBtn"> Packages </button>
+                {{-- <button type="button" class="btn btn-success btn-lg mb-3 packageBtn"> Packages </button> --}}
             </div>
 
-            <div class="container" id="transactionByPackage" style="display: none; background-color: rgb(240, 240, 240);">
+            {{-- <div class="container" id="transactionByPackage" style="display: none; background-color: rgb(240, 240, 240);">
                 <p class="fs-4 text-center"> Credit Packages </p>
 
                 <form action="/dashboard/transactions/createPackages" method="post">
@@ -45,7 +45,7 @@
                         <div class="form-group">
                             <label for="downPayment">Down Payment</label>
                             <input type="number" class="form-control" name="down_payment" id="downPayment" placeholder="Down payment">
-                            {{-- <button type="button" role="button" class="btn btn-primary btn-sm mb-3 mt-1" data-bs-toggle="modal" data-bs-target="#viewVehicle"> View vehicles </button> --}}
+                            <button type="button" role="button" class="btn btn-primary btn-sm mb-3 mt-1" data-bs-toggle="modal" data-bs-target="#viewVehicle"> View vehicles </button>
                         </div>
 
                         <div class="form-group">
@@ -68,7 +68,7 @@
                         <button type="submit" class="btn btn-primary">Submit</button>
                     </div>
                 </form>
-            </div>
+            </div> --}}
 
             <div class="container" id="transactionByCredit" style="display: none; background-color: rgb(240, 240, 240);">
                 <p class="fs-4 text-center"> Transaction by Credits </p>
@@ -76,31 +76,87 @@
                 <form action="/dashboard/transactions/insertCredit" method="post">
                     @csrf
                     <div class="card-body">
-                        <div class="form-group">
+                        {{-- <div class="form-group">
                             <label for="cashCode">Credit Code</label>
                             <input type="text" class="form-control mb-3" name="credit_code" id="cashCode" placeholder="Credit's code">
+                        </div> --}}
+
+                        <div class="form-group">
+                            <label for="clientIdCredit">Client ID</label>
+                            <input type="text" class="form-control" name="client_id" id="clientIdCredit" value="" readonly>
+
+                            <button type="button" role="button" class="btn btn-primary btn-sm mb-3 mt-1" data-bs-toggle="modal"
+                             data-bs-target="#chooseClients"> Choose Clients </button>
+                            {{-- <select class="form-control mb-3" name="client_id" id="clientId">
+                                @foreach ($clientData as $cli)
+                                    <option value="{{ $cli->client_id }}">{{ $cli->client_id }}</option>
+                                @endforeach
+                            </select> --}}
                         </div>
 
                         <div class="form-group">
-                            <label for="clientId">Client ID</label>
-                            <input type="text" class="form-control mb-3" name="client_id" id="clientId" placeholder="Client's ID">
-                        </div>
-
-                        <div class="form-group">
-                            <label for="packageCode">Package Code</label>
+                            <label for="dpPercentage">Percentage of Down Payment</label>
                             {{-- <input type="text" class="form-control" name="package_code" id="packageCode" placeholder="Package's code"> --}}
                             {{-- <button type="button" role="button" class="btn btn-primary btn-sm mb-3 mt-1" data-bs-toggle="modal" data-bs-target="#viewVehicle"> View vehicles </button> --}}
 
-                            <select name="package_code" id="packageCode" class="form-control">
+                            {{-- <input type="text" class="form-control" name="down_payment_percentage" id="dpPercentage"> --}}
+
+                            <select name="down_payment_percentage" id="dpPercentage" class="form-control">
+                                <option value="20"> 20% </option>
+                                <option value="25"> 25% </option>
+                                <option value="30"> 30% </option>
+                            </select>
+
+                            {{-- <select name="package_code" id="packageCode" class="form-control">
                                 @foreach ($packageData as $pkg)
                                     <option value="{{ $pkg->package_code }}"> {{ $pkg->package_code }} (Rp.{{ $pkg->package_price }}) </option>
                                 @endforeach
-                            </select>
+                            </select> --}}
                         </div>
 
                         <div class="form-group">
-                            <label for="vehicleCode">Vehicle Code</label>
-                            <input type="text" class="form-control" name="vehicle_code" id="vehicleCode" placeholder="Vehicle's code">
+                            <label for="intPercentage">Interest Choice</label>
+                            {{-- <input type="text" class="form-control" name="package_code" id="packageCode" placeholder="Package's code"> --}}
+                            {{-- <button type="button" role="button" class="btn btn-primary btn-sm mb-3 mt-1" data-bs-toggle="modal" data-bs-target="#viewVehicle"> View vehicles </button> --}}
+
+                            {{-- <input type="text" class="form-control" name="interest_percentage" id="intPercentage"> --}}
+
+                            <select name="interest_percentage" id="intPercentage" class="form-control">
+                                <option value="8"> 1 Year (8%) </option>
+                                <option value="9"> 2 Year (9%) </option>
+                                <option value="10"> 3 Year (10%) </option>
+                            </select>
+
+                            {{-- <select name="package_code" id="packageCode" class="form-control">
+                                @foreach ($packageData as $pkg)
+                                    <option value="{{ $pkg->package_code }}"> {{ $pkg->package_code }} (Rp.{{ $pkg->package_price }}) </option>
+                                @endforeach
+                            </select> --}}
+                        </div>
+
+                        <div class="form-group">
+                            <label for="instLength">Instalmnet Length</label>
+                            {{-- <input type="text" class="form-control" name="package_code" id="packageCode" placeholder="Package's code"> --}}
+                            {{-- <button type="button" role="button" class="btn btn-primary btn-sm mb-3 mt-1" data-bs-toggle="modal" data-bs-target="#viewVehicle"> View vehicles </button> --}}
+
+                            {{-- <input type="text" class="form-control" name="interest_percentage" id="intPercentage"> --}}
+
+                            <select name="instalment_length" id="instLength" class="form-control">
+                                <option value="12"> 1 Year </option>
+                                <option value="24"> 2 Year </option>
+                                <option value="36"> 3 Year </option>
+                            </select>
+
+                            {{-- <select name="package_code" id="packageCode" class="form-control">
+                                @foreach ($packageData as $pkg)
+                                    <option value="{{ $pkg->package_code }}"> {{ $pkg->package_code }} (Rp.{{ $pkg->package_price }}) </option>
+                                @endforeach
+                            </select> --}}
+                        </div>
+
+                        <div class="form-group">
+                            <label for="vehicleCodeCredit">Vehicle Code</label>
+                            <input type="text" class="form-control" name="vehicle_code" id="vehicleCodeCredit" placeholder="Vehicle's code" readonly>
                             <button type="button" role="button" class="btn btn-primary btn-sm mb-3 mt-1" data-bs-toggle="modal" data-bs-target="#viewVehicle"> View vehicles </button>
                         </div>
 
@@ -137,30 +193,46 @@
                 <form action="/dashboard/transactions/insertCash" method="post">
                     @csrf
                     <div class="card-body">
-                        <div class="form-group">
+                        {{-- <div class="form-group">
                             <label for="cashCode">Cash Code</label>
                             <input type="text" class="form-control mb-3" name="cash_code" id="cashCode" placeholder="Cash's code">
+                        </div> --}}
+
+                        <div class="form-group">
+                            <label for="clientIdCash">Client ID</label>
+                            <input type="text" class="form-control" name="client_id" id="clientIdCash" value="" readonly>
+
+                            <button type="button" role="button" class="btn btn-primary btn-sm mb-3 mt-1" data-bs-toggle="modal"
+                             data-bs-target="#chooseClients"> Choose Clients </button>
+                            {{-- <select class="form-control mb-3" name="client_id" id="clientId">
+                                @foreach ($clientData as $cli)
+                                    <option value="{{ $cli->client_id }}">{{ $cli->client_id }}</option>
+                                @endforeach
+                            </select> --}}
                         </div>
 
                         <div class="form-group">
-                            <label for="clientId">Client ID</label>
-                            <input type="text" class="form-control mb-3" name="client_id" id="clientId" placeholder="Client's ID">
-                        </div>
+                            <label for="vehicleCodeCash">Vehicle Code</label>
+                            <input type="text" class="form-control" name="vehicle_code" id="vehicleCodeCash" placeholder="Vehicle's code" readonly>
 
-                        <div class="form-group">
-                            <label for="vehicleCode">Vehicle Code</label>
-                            <input type="text" class="form-control" name="vehicle_code" id="vehicleCode" placeholder="Vehicle's code">
-                            <button type="button" role="button" class="btn btn-primary btn-sm mb-3 mt-1" data-bs-toggle="modal" data-bs-target="#viewVehicle"> View vehicles </button>
+                            {{-- <select class="form-control mb-3" name="client_id" id="clientId">
+                                @foreach ($vehicleData as $v)
+                                    <option value="{{ $v->vehicle_code }}">{{ $v->vehicle_code }}</option>
+                                @endforeach
+                            </select> --}}
+
+                            <button type="button" role="button" class="btn btn-primary btn-sm mb-3 mt-1" data-bs-toggle="modal"
+                             data-bs-target="#viewVehicle"> View vehicles </button>
                         </div>
 
                         <div class="form-group">
                             <label for="cashDate">Cash Date</label>
-                            <input type="date" class="form-control mb-3" name="cash_date" id="cashDate" placeholder="Cash's date">
+                            <input type="date" class="form-control mb-3" name="cash_date" id="cashDate" placeholder="Cash's date" value="{{ now()->format('Y-m-d') }}" disabled>
                         </div>
 
                         <div class="form-group">
-                            <label for="cashAmount">Cash Amount</label>
-                            <input type="number" class="form-control mb-3" name="cash_amount" id="cashAmount" placeholder="Cash's amount">
+                            <label for="vehiclePriceCash">Cash Amount</label>
+                            <input type="text" class="form-control mb-3" name="cash_amount" id="vehiclePriceCash" placeholder="Cash's amount" value="" readonly>
                         </div>
                     </div>
 
@@ -171,11 +243,11 @@
             </div>
         </div>
 
-        <div class="col">
-            <div class="container">
+        <div class="col-md-8">
+            <div class="container p-3 mb-3 mt-3 border border-dark">
                 <p class="fs-4 text-center">Customer Lists</p>
 
-                <div class="control-room text-center">
+                {{-- <div class="control-room text-center">
                     <div class="text-center">
                         <button type="button" class="btn btn-success btn-sm nameBtn"> Query by Name </button>
                         <button type="button" class="btn btn-success btn-sm idBtn"> Query by ID </button>
@@ -209,14 +281,14 @@
                         
                         <button type="submit" class="btn btn-primary btn-sm"> Search </button>
                     </form>
-                </div>
+                </div> --}}
 
-                <table class="table table-striped projects">
+                <table class="table table-striped projects" id="customerTable">
                     <thead>
                         <tr>
-                            <th style="width: 10%" class="text-center">
+                            {{-- <th style="width: 10%" class="text-center">
                                 Client ID
-                            </th>
+                            </th> --}}
                             <th style="width: 15%" class="text-center">
                                 Client Name
                             </th>
@@ -227,18 +299,18 @@
                                 Client Phone Number
                             </th>
 
-                            <th style="width: 10%" class="text-center">
-                            </th>
+                            {{-- <th style="width: 10%" class="text-center">
+                            </th> --}}
                         </tr>
                     </thead>
                     <tbody>
                         @foreach ($clientData as $cli)
                             <tr>
-                                <td class="text-center">
+                                {{-- <td class="text-center">
                                     <a>
                                         {{ $cli->client_id }}
                                     </a>
-                                </td>
+                                </td> --}}
                                 <td class="text-center">
                                     <a>
                                         {{ $cli->client_name }}
@@ -254,37 +326,31 @@
                                         {{ $cli->client_phone }}
                                     </a>
                                 </td>
-                                <td class="project-actions text-right">
-                                    <button class="btn btn-info btn-sm">
+                                {{-- <td class="project-actions text-right">
+                                    <button class="btn btn-info btn-sm w-50">
                                         <i class="fas fa-pencil-alt">
                                             Edit
                                         </i>
                                     </button>
-                                    
-                                    <button class="btn btn-danger btn-sm">
-                                        <i class="fas fa-trash">
-                                            Delete
-                                        </i>
-                                    </button>
-                                </td>
+                                </td> --}}
                             </tr>
                         @endforeach
                     </tbody>
                 </table>
             </div>
 
-            <div class="container" id="cashTable">
+            <div class="container p-3 mb-3 border border-dark" id="cashTable">
                 <p class="fs-4 text-center">Transaction by Cash List</p>
 
-                <table class="table table-striped projects">
+                <table class="table table-striped projects" id="transactionCashTable">
                     <thead>
                         <tr>
                             <th style="width: 10%" class="text-center">
                                 Cash Code
                             </th>
-                            <th style="width: 15%" class="text-center">
+                            {{-- <th style="width: 15%" class="text-center">
                                 Client ID
-                            </th>
+                            </th> --}}
                             <th style="width: 15%" class="text-center">
                                 Vehicle Code
                             </th>
@@ -307,11 +373,11 @@
                                     {{ $cashes->cash_code }}
                                 </a>
                             </td>
-                            <td class="text-center">
+                            {{-- <td class="text-center">
                                 <a>
                                     {{ $cashes->client_id }}
                                 </a>
-                            </td>
+                            </td> --}}
                             <td class="text-center">
                                 <a>
                                     {{ $cashes->vehicle_code }}
@@ -328,17 +394,16 @@
                                 </a>
                             </td>
                             <td class="project-actions text-right">
-                                <button class="btn btn-info btn-sm">
-                                    <i class="fas fa-pencil-alt">
-                                        Edit
-                                    </i>
-                                </button>
-                                
-                                <button class="btn btn-danger btn-sm">
-                                    <i class="fas fa-trash">
-                                        Delete
-                                    </i>
-                                </button>
+                                <form action="/invoice" method="get">
+                                    <input type="hidden" name="client_id" value="{{ $cashes->client_id }}">
+                                    <input type="hidden" name="vehicle_code" value="{{ $cashes->vehicle_code }}">
+                                    
+                                    <button class="btn btn-info btn-sm">
+                                        <i class="fas fa-pencil-alt">
+                                            Print
+                                        </i>
+                                    </button>
+                                </form>
                             </td>
                         </tr>
                         @endforeach
@@ -346,18 +411,18 @@
                 </table>
             </div>
 
-            <div class="container" id="creditTable">
+            <div class="container p-3 mb-3 border border-dark" id="creditTable">
                 <p class="fs-4 text-center">Transaction by Credit List</p>
 
-                <table class="table table-striped projects">
+                <table class="table table-striped projects" id="transactionCreditTable">
                     <thead>
                         <tr>
                             <th style="width: 10%" class="text-center">
                                 Credit Code
                             </th>
-                            <th style="width: 15%" class="text-center">
+                            {{-- <th style="width: 15%" class="text-center">
                                 Client ID
-                            </th>
+                            </th> --}}
                             <th style="width: 15%" class="text-center">
                                 Package Code
                             </th>
@@ -389,11 +454,11 @@
                                         {{ $crit->credit_code }}
                                     </a>
                                 </td>
-                                <td class="text-center">
+                                {{-- <td class="text-center">
                                     <a>
                                         {{ $crit->client_id }}
                                     </a>
-                                </td>
+                                </td> --}}
                                 <td class="text-center">
                                     <a>
                                         {{ $crit->package_code }}
@@ -430,18 +495,6 @@
                                             Pay
                                         </i>
                                     </button>
-
-                                    <button class="btn btn-info btn-sm w-100">
-                                        <i class="fas fa-pencil-alt">
-                                            Edit
-                                        </i>
-                                    </button>
-                                    
-                                    <button class="btn btn-danger btn-sm w-100">
-                                        <i class="fas fa-trash">
-                                            Delete
-                                        </i>
-                                    </button>
                                 </td>
                             </tr>
                         @endforeach
@@ -449,15 +502,12 @@
                 </table>
             </div>
 
-            <div class="container" id="instalmentTable">
+            <div class="container p-3 mb-3 border border-dark" id="instalmentTable">
                 <p class="fs-4 text-center">Unpaid Instalments List</p>
 
-                <table class="table table-striped projects">
+                <table class="table table-striped projects" id="unpaidInstalmentTable">
                     <thead>
                         <tr>
-                            <th style="width: 10%" class="text-center">
-                                Instalment Code
-                            </th>
                             <th style="width: 15%" class="text-center">
                                 Credit Code
                             </th>
@@ -510,7 +560,7 @@
                                 </a>
                             </td>
                             <td class="project-actions text-right">
-                                <button class="btn btn-info btn-sm">
+                                {{-- <button class="btn btn-info btn-sm">
                                     <i class="fas fa-pencil-alt">
                                         Edit
                                     </i>
@@ -520,7 +570,7 @@
                                     <i class="fas fa-trash">
                                         Delete
                                     </i>
-                                </button>
+                                </button> --}}
                             </td>
                         </tr>
                         @endforeach
