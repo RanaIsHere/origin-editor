@@ -16,3 +16,5 @@ E. Through cash, an user can select the customers and vehicles accordingly. Othe
 F. Unfortunately, credits does not have an invoice or anything similar. Thus, the only finished features here is the cash systems.
 
 G. You can print the invoice of the cash, and it is made to be light as possible with @media print
+
+H. Instalments and packages are calculated.
